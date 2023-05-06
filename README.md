@@ -6,8 +6,8 @@
 ### Como levantar proyecto :
 * Clonar proyecto.
 * Instalar dependencias ```npm i```
-* Correrlo con ```node index.js``
-* Para correr los test y que creer o actualizar los snapshots de Jest. ```npm test -- -u```
+* Correrlo con ```node index.js```
+* Para correr los test y que creer o actualizar los snapshots de Jest. ```npm test```
 
 
 
