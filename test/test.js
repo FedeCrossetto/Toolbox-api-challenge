@@ -6,8 +6,8 @@ const expect = chai.expect;
 chai.use(chaiHttp);
 chai.should();
 
-//Valida que la petición retorne un objeto de files con código de estado 200.
 describe("GET /files/list", () => {
+  //Valida que la petición retorne un objeto de files con código de estado 200.
   it("should return an object of files", (done) => {
     chai
       .request(app)
@@ -21,8 +21,8 @@ describe("GET /files/list", () => {
   });
 });
 
-//Valida que la petición retorne un objeto en particular con los datos del file y  con código de estado 200.
 describe("GET /files/data", () => {
+  //Valida que la petición retorne un objeto en particular con los datos del file y  con código de estado 200.
   it("It should return the data from a file", (done) => {
     chai
       .request(app)

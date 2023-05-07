@@ -9,15 +9,6 @@ let config = {
   },
 };
 
-const agent = new https.Agent({
-  rejectUnauthorized: false,
-});
-
-const instance = axios.create({
-  timeout: 5000,
-  httpsAgent: agent,
-});
-
 exports.listFiles = (req, res) => {
   axios.get(`${baseurl}/files`, config)
     .then((response) => {
@@ -28,24 +19,11 @@ exports.listFiles = (req, res) => {
     });
 };
 
-exports.listFiles = (req, res) => {
-  axios.get(`${baseurl}/files`, config)
-    .then((response) => {
-      if (response.data.length === 0) {
-        res.status(404).send('No se encontraron archivos');
-      } else {
-        res.send(JSON.stringify(response.data));
-      }
-    })
-    .catch((error) => {
-      res.status(404).send('File not found');
-    });
-};
 
 exports.fileData = (req, res) => {
   const fileName = req.query.fileName;
   const fileUrl = `${baseurl}/file/test${fileName}.csv`;
-  instance.get(fileUrl, config)
+  axios.get(fileUrl, config)
     .then((response) => {
       const dataArray = response.data.split("\n").map((line) => {
         const [file, text, number, hex, _] = line.split(",");
@@ -57,3 +35,4 @@ exports.fileData = (req, res) => {
       res.status(404).send('File not found');
     });
 };
+
