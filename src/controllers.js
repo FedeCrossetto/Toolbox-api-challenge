@@ -21,12 +21,24 @@ const instance = axios.create({
 exports.listFiles = (req, res) => {
   axios.get(`${baseurl}/files`, config)
     .then((response) => {
-      console.log(response.data);
       res.send(JSON.stringify(response.data));
     })
     .catch((error) => {
-      console.error(error);
-      res.status(404).send('File list not found');
+      res.status(500).send('Internal server error');
+    });
+};
+
+exports.listFiles = (req, res) => {
+  axios.get(`${baseurl}/files`, config)
+    .then((response) => {
+      if (response.data.length === 0) {
+        res.status(404).send('No se encontraron archivos');
+      } else {
+        res.send(JSON.stringify(response.data));
+      }
+    })
+    .catch((error) => {
+      res.status(404).send('File not found');
     });
 };
 
@@ -40,10 +52,8 @@ exports.fileData = (req, res) => {
         return { file, text, number, hex };
       });
       res.send(JSON.stringify(dataArray));
-      console.log('Param',response.data);
     })
     .catch((error) => {
-      console.error(error);
       res.status(404).send('File not found');
     });
 };
